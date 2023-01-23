@@ -10,7 +10,7 @@ class Spikes:
     def __init__(self, raw, stim_mode, plot_stim):
         # some constants
         self.mid_ei = 2
-        self.spk_len = 100
+        self.spk_len = 200
         self.stim_artifact_len = 23
         self.noise_sf = 2.5
         self.artifact_sf = 1.5
@@ -33,6 +33,12 @@ class Spikes:
         self.spks_len = self.get_average_spike_length()
         self.num_good_spks = self.good_mid_spks.shape[1]
 
+    def normalize_amplitude_only(self, spks):
+        # normalize spikes by their peak-to-peak amplitudes only        
+        scale_factor = abs(np.ptp(spks, axis=0))    # normalize spikes by thei peak-to-peak amplitudes
+        spks_norm = spks/scale_factor
+        return spks_norm
+
     def normalize(self, spks, norm_len):
         # normalize spikes by peak-to-peak amplitude and in time
         # scale all spikes to a standard width        
@@ -54,8 +60,7 @@ class Spikes:
         scale_factor = abs(np.ptp(new_ys, axis=0))    # normalize spikes by thei peak-to-peak amplitudes
         #scale_factor = 1
         spks_norm = new_ys/scale_factor
-        return spks_norm
-    
+        return spks_norm    
 
     def get_average_spike_length(self):
         spk_ref = self.to_median(self.good_mid_spks)
