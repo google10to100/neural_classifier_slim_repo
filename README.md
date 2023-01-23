@@ -1,4 +1,4 @@
-# neural_slassifier_slim_repo
+# neural_classifier_slim_repo
 
 # OVERVIEW
 Classifies the directionality of recorded neural signals - i.e. "spikes" - using a neural network
