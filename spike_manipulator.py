@@ -11,7 +11,8 @@ class Spikes:
         # some constants
         self.mid_ei = 2
         self.spk_len = 200
-        self.stim_artifact_len = 23
+        # self.stim_artifact_len = 23
+        self.stim_artifact_len = 30
         self.noise_sf = 2.5
         self.artifact_sf = 1.5
         self.sr = 100000
@@ -68,7 +69,8 @@ class Spikes:
         sig_after_hump2 = spk_ref[hump2_i:]
         zero_xings = np.where(sig_after_hump2 < 0.01)
         first_zero_xing = zero_xings[0][0]
-        sig_end_i = hump2_i + first_zero_xing
+        # sig_end_i = hump2_i + first_zero_xing
+        sig_end_i = hump2_i + 10
         return sig_end_i
 
     def get_peaks(self, spk):
